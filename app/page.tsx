@@ -1,93 +1,23 @@
 import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ServicesSection from "@/components/ServicesSection";
 import SiteInteractions from "@/components/SiteInteractions";
 import { Icon, Whatsapp } from "@/components/icons";
 
 /* ---- data ---- */
-const SERVICES = [
-  {
-    idx: "01",
-    img: "/card-impressora.png",
-    title: "Locação de Impressoras",
-    text: "Soluções completas com manutenção inclusa, suporte técnico e equipamentos de alta performance.",
-  },
-  {
-    idx: "02",
-    img: "/card-filamento.png",
-    title: "Filamentos 3D",
-    text: "Filamentos de alta qualidade para impressões 3D mais precisas e duráveis.",
-  },
-  {
-    idx: "03",
-    img: "/card-cartucho.png",
-    title: "Cartuchos",
-    text: "Cartuchos originais e compatíveis com ótimo rendimento e excelente custo-benefício.",
-  },
-  {
-    idx: "04",
-    img: "/card-toner.png",
-    title: "Toners",
-    text: "Toners originais e compatíveis com máxima performance e qualidade de impressão.",
-  },
-];
-
 const BRANDS = ["Canon", "Epson", "Kyocera", "Ricoh", "Creality", "Elegoo", "HP", "Brother"];
 
 export default function Page() {
   return (
     <>
-      {/* ---------------- NAVBAR ---------------- */}
-      <header className="nav" id="nav">
-        <div className="nav-inner">
-          <a className="brand" href="#inicio" aria-label="Copy Impressoras">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="brand-logo" src="/logo.png" alt="Copy Impressoras" />
-          </a>
-          <nav className="nav-links">
-            <a href="#inicio" className="active">Início</a>
-            <a href="#empresa">Empresa</a>
-            <a href="#servicos">Serviços</a>
-            <a href="#marcas">Marcas</a>
-            <a href="#contato">Contato</a>
-          </nav>
-          <div className="nav-cta">
-            <a className="btn btn--primary nav-cta-btn" href="#contato">
-              <span className="full">Solicitar</span> Orçamento
-            </a>
-            <button className="burger" id="burger" aria-label="Menu"><span /></button>
-          </div>
-        </div>
-      </header>
+      <Navbar home />
 
       <main>
         <Hero />
 
         {/* ---------------- SERVIÇOS ---------------- */}
-        <section className="services" id="servicos">
-          <div className="container">
-            <div className="services-top">
-              <div className="section-head reveal" style={{ marginBottom: 0 }}>
-                <span className="eyebrow">Nossas soluções</span>
-                <h2 className="section-title">
-                  Tudo o que você precisa <br /> em <span className="lime">um só lugar</span>
-                </h2>
-              </div>
-            </div>
-
-            <div className="cards">
-              {SERVICES.map((s, i) => (
-                <article className="card reveal" data-d={String((i % 4) + 1)} key={s.idx}>
-                  <div className="card-media">
-                    <span className="card-media-glow" />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={s.img} alt={s.title} />
-                  </div>
-                  <h3>{s.title}</h3>
-                  <p>{s.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ServicesSection />
 
         {/* ---------------- QUEM SOMOS ---------------- */}
         <section className="about" id="empresa">
@@ -184,63 +114,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ---------------- FOOTER ---------------- */}
-        <footer className="footer">
-          <div className="container">
-            <div className="footer-grid">
-              <div className="footer-brand">
-                <a className="brand" href="#inicio" aria-label="Copy Impressoras">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="brand-logo brand-logo--footer" src="/logo.png" alt="Copy Impressoras" />
-                </a>
-                <p>Soluções completas em impressão, com a qualidade e a confiança que você já conhece.</p>
-                <div className="social">
-                  <a href="#" aria-label="Facebook"><Icon name="facebook" /></a>
-                  <a href="#" aria-label="Instagram"><Icon name="instagram" /></a>
-                  <a href="#" data-wa aria-label="WhatsApp"><Whatsapp /></a>
-                </div>
-              </div>
-
-              <div>
-                <h5>Contato</h5>
-                <div className="row"><Whatsapp /><span>(42) 9 9818-7045 <em>WhatsApp</em></span></div>
-                <div className="row"><Icon name="phone" /><span>(42) 3304-0432 <em>Fixo</em></span></div>
-                <div className="row"><Icon name="mail" /><span>copyimpressoras1@gmail.com</span></div>
-                <div className="row"><Icon name="instagram" /><span>@copyimpressoras</span></div>
-              </div>
-
-              <div>
-                <h5>Endereço</h5>
-                <div className="row"><Icon name="pin" /><span>Rua Pedro Siqueira, 685<br />Guarapuava — PR</span></div>
-                <div className="row"><Icon name="clock" /><span>Seg a Sex — 08h às 18h<br />Sábado — 08h às 12h</span></div>
-              </div>
-
-              <div>
-                <h5>Localização</h5>
-                <div className="footer-map">
-                  <iframe
-                    title="Localização Copy Impressoras — Rua Pedro Siqueira 685, Guarapuava-PR"
-                    src="https://maps.google.com/maps?q=Rua%20Pedro%20Siqueira%2C%20685%2C%20Guarapuava%20-%20PR&z=16&output=embed"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
-                <a
-                  className="map-link"
-                  href="https://www.google.com/maps/search/?api=1&query=Rua+Pedro+Siqueira+685+Guarapuava+PR"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Ver no mapa <Icon name="arrow" strokeWidth={2.2} />
-                </a>
-              </div>
-            </div>
-
-            <div className="footer-bottom">
-              <span>© {new Date().getFullYear()} Copy Impressoras — Todos os direitos reservados.</span>
-            </div>
-          </div>
-        </footer>
+        <Footer home />
       </main>
 
       {/* floating whatsapp */}

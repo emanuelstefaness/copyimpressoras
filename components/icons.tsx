@@ -17,6 +17,7 @@ const PATHS: Record<string, string> = {
   // ui / contact
   arrow: "M5 12h14M13 6l6 6-6 6",
   arrowRight: "M5 12h14M13 6l6 6-6 6",
+  check: "M20 6L9 17l-5-5",
   play: "M8 5v14l11-7z",
   phone: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z",
   mail: "M3 6h18v12H3zM3 7l9 6 9-6",
