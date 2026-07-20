@@ -10,11 +10,12 @@ type Form = {
   categoria: string;
   nome: string;
   modelo: string;
+  valor: string;
   descricao: string;
   imagem_url: string;
 };
 
-const emptyForm: Form = { id: null, categoria: CATEGORIAS[0].slug, nome: "", modelo: "", descricao: "", imagem_url: "" };
+const emptyForm: Form = { id: null, categoria: CATEGORIAS[0].slug, nome: "", modelo: "", valor: "", descricao: "", imagem_url: "" };
 
 export default function AdminPage() {
   const router = useRouter();
@@ -48,7 +49,7 @@ export default function AdminPage() {
   const editar = (p: Produto) => {
     setForm({
       id: p.id, categoria: p.categoria, nome: p.nome,
-      modelo: p.modelo ?? "", descricao: p.descricao ?? "", imagem_url: p.imagem_url ?? "",
+      modelo: p.modelo ?? "", valor: p.valor ?? "", descricao: p.descricao ?? "", imagem_url: p.imagem_url ?? "",
     });
     setFile(null);
     setMsg(null);
@@ -71,7 +72,7 @@ export default function AdminPage() {
       }
       const payload = {
         categoria: form.categoria, nome: form.nome, modelo: form.modelo || null,
-        descricao: form.descricao || null, imagem_url: imagem_url || null,
+        valor: form.valor || null, descricao: form.descricao || null, imagem_url: imagem_url || null,
       };
       const res = form.id
         ? await supabase.from("produtos").update(payload).eq("id", form.id)
@@ -141,6 +142,10 @@ export default function AdminPage() {
           <label className="admin-field">
             <span>Modelo <em>(opcional)</em></span>
             <input value={form.modelo} onChange={(e) => setForm({ ...form, modelo: e.target.value })} placeholder="Ex.: HP LaserJet M428" />
+          </label>
+          <label className="admin-field">
+            <span>Valor <em>(opcional)</em></span>
+            <input value={form.valor} onChange={(e) => setForm({ ...form, valor: e.target.value })} placeholder="Ex.: R$ 1.200,00 ou A partir de R$ 99/mês" />
           </label>
           <label className="admin-field">
             <span>Descrição</span>

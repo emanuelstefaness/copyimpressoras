@@ -23,6 +23,7 @@ export type Produto = {
   categoria: string;
   nome: string;
   modelo: string | null;
+  valor: string | null;
   descricao: string | null;
   imagem_url: string | null;
   ordem: number | null;

@@ -72,9 +72,12 @@ export default async function ProdutoCategoriaPage({ params }: { params: { categ
                       {p.modelo && <span className="prod-card-model">{p.modelo}</span>}
                       <h3>{p.nome}</h3>
                       {p.descricao && <p>{p.descricao}</p>}
-                      <a className="prod-card-cta" data-wa href="#">
-                        Solicitar orçamento <Icon name="arrow" strokeWidth={2.2} />
-                      </a>
+                      <div className="prod-card-foot">
+                        {p.valor && <span className="prod-card-valor">{p.valor}</span>}
+                        <a className="prod-card-cta" data-wa href="#">
+                          Solicitar orçamento <Icon name="arrow" strokeWidth={2.2} />
+                        </a>
+                      </div>
                     </div>
                   </article>
                 ))}
