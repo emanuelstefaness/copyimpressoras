@@ -84,7 +84,7 @@ export default function Page() {
                 solução ideal em impressão para a sua empresa.
               </p>
 
-              <form className="cta-form" id="orcamento-form" noValidate>
+              <form className="cta-form" id="orcamento-form">
                 <div className="field-row">
                   <div className="field">
                     <label htmlFor="of-nome">Nome</label>
@@ -106,9 +106,6 @@ export default function Page() {
                 <button type="submit" className="btn btn--primary cta-form-submit">
                   Enviar solicitação <Icon name="arrow" strokeWidth={2.4} />
                 </button>
-                <p className="cta-form-note" data-form-status>
-                  Ao enviar, abrimos o WhatsApp com sua mensagem pronta e enviamos uma cópia por e-mail.
-                </p>
               </form>
             </div>
           </div>

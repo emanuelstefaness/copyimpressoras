@@ -50,10 +50,8 @@ export default function SiteInteractions() {
       el.rel = "noopener";
     });
 
-    /* ---- contact form -> WhatsApp ---- */
+    /* ---- contact form -> WhatsApp + e-mail ---- */
     const form = document.getElementById("orcamento-form") as HTMLFormElement | null;
-    const note = document.querySelector<HTMLElement>("[data-form-status]");
-    const noteDefault = note?.textContent || "";
     if (form) {
       on(form, "submit", (e) => {
         e.preventDefault();
@@ -62,10 +60,7 @@ export default function SiteInteractions() {
         const contato = (data.get("contato") as string || "").trim();
         const email = (data.get("email") as string || "").trim();
         const descricao = (data.get("descricao") as string || "").trim();
-        if (!nome || !contato || !descricao) {
-          if (note) { note.textContent = "Preencha nome, contato e descrição."; note.className = "cta-form-note err"; }
-          return;
-        }
+        if (!nome || !contato || !descricao) return;
         const msg =
           `*Nova solicitação de orçamento — Copy Impressoras*\n\n` +
           `*Nome:* ${nome}\n` +
@@ -87,9 +82,7 @@ export default function SiteInteractions() {
             Descrição: descricao,
           }),
         }).catch(() => {});
-        if (note) { note.textContent = "Enviado! Abrimos o WhatsApp e você também recebe por e-mail."; note.className = "cta-form-note ok"; }
         form.reset();
-        setTimeout(() => { if (note) { note.textContent = noteDefault; note.className = "cta-form-note"; } }, 6000);
       });
     }
 

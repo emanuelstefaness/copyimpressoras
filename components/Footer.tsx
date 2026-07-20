@@ -30,7 +30,7 @@ export default function Footer({ home = false }: { home?: boolean }) {
           <div>
             <h5>Endereço</h5>
             <div className="row"><Icon name="pin" /><span>Rua Pedro Siqueira, 685<br />Guarapuava — PR</span></div>
-            <div className="row"><Icon name="clock" /><span>Seg a Sex — 08h às 18h<br />Sábado — 08h às 12h</span></div>
+            <div className="row"><Icon name="clock" /><span>Segunda a sexta<br />08h às 18h</span></div>
           </div>
 
           <div>
