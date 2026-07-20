@@ -107,7 +107,7 @@ export default function Page() {
                   Enviar solicitação <Icon name="arrow" strokeWidth={2.4} />
                 </button>
                 <p className="cta-form-note" data-form-status>
-                  Ao enviar, você será direcionado ao nosso WhatsApp com a mensagem pronta.
+                  Ao enviar, abrimos o WhatsApp com sua mensagem pronta e enviamos uma cópia por e-mail.
                 </p>
               </form>
             </div>

@@ -6,6 +6,7 @@ import Lenis from "lenis";
 
 const WA_NUMBER = "5542998187045"; // (42) 9 9818-7045
 const WA_TEXT = "Olá! Gostaria de solicitar um orçamento com a Copy Impressoras.";
+const EMAIL_TO = "copyimpressoras1@gmail.com"; // recebe as solicitações do formulário
 
 export default function SiteInteractions() {
   useEffect(() => {
@@ -71,8 +72,22 @@ export default function SiteInteractions() {
           `*Contato:* ${contato}\n` +
           (email ? `*E-mail:* ${email}\n` : "") +
           `*Descrição:* ${descricao}`;
+        // 1) abre o WhatsApp com a mensagem pronta (síncrono = evita bloqueio de pop-up)
         window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
-        if (note) { note.textContent = "Abrindo o WhatsApp com sua mensagem…"; note.className = "cta-form-note ok"; }
+        // 2) envia uma cópia por e-mail (FormSubmit — dispara em segundo plano)
+        fetch(`https://formsubmit.co/ajax/${EMAIL_TO}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            _subject: "Nova solicitação de orçamento — Copy Impressoras",
+            _template: "table",
+            Nome: nome,
+            Contato: contato,
+            "E-mail": email || "(não informado)",
+            Descrição: descricao,
+          }),
+        }).catch(() => {});
+        if (note) { note.textContent = "Enviado! Abrimos o WhatsApp e você também recebe por e-mail."; note.className = "cta-form-note ok"; }
         form.reset();
         setTimeout(() => { if (note) { note.textContent = noteDefault; note.className = "cta-form-note"; } }, 6000);
       });
