@@ -28,6 +28,7 @@ export default async function ProdutoCategoriaPage({ params }: { params: { categ
   if (!cat) notFound();
 
   let produtos: Produto[] = [];
+  const relMap: Record<string, Pick<Produto, "id" | "nome" | "categoria">> = {};
   if (supabase) {
     const { data } = await supabase
       .from("produtos")
@@ -36,6 +37,16 @@ export default async function ProdutoCategoriaPage({ params }: { params: { categ
       .order("ordem", { ascending: true })
       .order("created_at", { ascending: true });
     produtos = data ?? [];
+
+    // busca os dados dos produtos relacionados (nome/categoria) p/ os chips
+    const relIds = Array.from(new Set(produtos.flatMap((p) => p.relacionados ?? [])));
+    if (relIds.length) {
+      const { data: rels } = await supabase
+        .from("produtos")
+        .select("id,nome,categoria")
+        .in("id", relIds);
+      (rels ?? []).forEach((r) => { relMap[r.id] = r as Pick<Produto, "id" | "nome" | "categoria">; });
+    }
   }
 
   return (
@@ -59,7 +70,7 @@ export default async function ProdutoCategoriaPage({ params }: { params: { categ
             {produtos.length > 0 ? (
               <div className="prod-grid">
                 {produtos.map((p) => (
-                  <article className="prod-card" key={p.id}>
+                  <article className="prod-card" id={`p-${p.id}`} key={p.id}>
                     <div className="prod-card-media">
                       {p.imagem_url ? (
                         // eslint-disable-next-line @next/next/no-img-element
@@ -72,6 +83,22 @@ export default async function ProdutoCategoriaPage({ params }: { params: { categ
                       {p.modelo && <span className="prod-card-model">{p.modelo}</span>}
                       <h3>{p.nome}</h3>
                       {p.descricao && <p>{p.descricao}</p>}
+                      {p.relacionados && p.relacionados.some((rid) => relMap[rid]) && (
+                        <div className="prod-card-rel">
+                          <span className="prod-card-rel-label">Compatível com</span>
+                          <div className="prod-card-rel-list">
+                            {p.relacionados.map((rid) => {
+                              const r = relMap[rid];
+                              if (!r) return null;
+                              return (
+                                <Link key={rid} className="prod-rel-chip" href={`/produtos/${r.categoria}#p-${r.id}`}>
+                                  {r.nome}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
                       <div className="prod-card-foot">
                         {p.valor && <span className="prod-card-valor">{p.valor}</span>}
                         <a className="prod-card-cta" data-wa href="#">

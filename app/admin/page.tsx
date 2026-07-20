@@ -13,9 +13,10 @@ type Form = {
   valor: string;
   descricao: string;
   imagem_url: string;
+  relacionados: string[];
 };
 
-const emptyForm: Form = { id: null, categoria: CATEGORIAS[0].slug, nome: "", modelo: "", valor: "", descricao: "", imagem_url: "" };
+const emptyForm: Form = { id: null, categoria: CATEGORIAS[0].slug, nome: "", modelo: "", valor: "", descricao: "", imagem_url: "", relacionados: [] };
 
 export default function AdminPage() {
   const router = useRouter();
@@ -50,6 +51,7 @@ export default function AdminPage() {
     setForm({
       id: p.id, categoria: p.categoria, nome: p.nome,
       modelo: p.modelo ?? "", valor: p.valor ?? "", descricao: p.descricao ?? "", imagem_url: p.imagem_url ?? "",
+      relacionados: p.relacionados ?? [],
     });
     setFile(null);
     setMsg(null);
@@ -73,6 +75,7 @@ export default function AdminPage() {
       const payload = {
         categoria: form.categoria, nome: form.nome, modelo: form.modelo || null,
         valor: form.valor || null, descricao: form.descricao || null, imagem_url: imagem_url || null,
+        relacionados: form.relacionados.length ? form.relacionados : null,
       };
       const res = form.id
         ? await supabase.from("produtos").update(payload).eq("id", form.id)
@@ -151,6 +154,35 @@ export default function AdminPage() {
             <span>Descrição</span>
             <textarea rows={4} value={form.descricao} onChange={(e) => setForm({ ...form, descricao: e.target.value })} placeholder="Detalhes do produto…" />
           </label>
+          {produtos.filter((p) => p.id !== form.id).length > 0 && (
+            <div className="admin-field">
+              <span>Produtos relacionados <em>(toner/cartucho compatível, etc.)</em></span>
+              <div className="admin-rel">
+                {produtos.filter((p) => p.id !== form.id).map((p) => {
+                  const cat = CATEGORIAS.find((c) => c.slug === p.categoria)?.title ?? p.categoria;
+                  const checked = form.relacionados.includes(p.id);
+                  return (
+                    <label className="admin-rel-item" key={p.id}>
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            relacionados: e.target.checked
+                              ? [...form.relacionados, p.id]
+                              : form.relacionados.filter((id) => id !== p.id),
+                          })
+                        }
+                      />
+                      <span className="admin-rel-cat">{cat}</span>
+                      <span className="admin-rel-nome">{p.nome}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          )}
           <label className="admin-field">
             <span>Foto</span>
             <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />

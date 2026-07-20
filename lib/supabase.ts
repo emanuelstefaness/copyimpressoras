@@ -26,6 +26,7 @@ export type Produto = {
   valor: string | null;
   descricao: string | null;
   imagem_url: string | null;
+  relacionados: string[] | null;
   ordem: number | null;
   created_at: string;
 };
