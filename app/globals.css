@@ -777,6 +777,8 @@ section { position: relative; z-index: 1; }
   transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
 }
 .admin-field textarea { resize: vertical; }
+.admin-field select option { background: #17171a; color: #fff; }
+.admin-field select { color-scheme: dark; }
 .admin-field input:focus, .admin-field select:focus, .admin-field textarea:focus {
   outline: none; border-color: var(--lime); box-shadow: 0 0 0 3px rgba(125,255,0,0.12);
 }
