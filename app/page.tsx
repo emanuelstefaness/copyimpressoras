@@ -44,7 +44,7 @@ export default function Page() {
                   <span className="about-tag"><span className="dot" />Nossa loja física</span>
                   <div className="about-stat-list">
                     <div className="stat">
-                      <b data-count="800" data-suffix="">+800</b>
+                      <b data-count="7" data-suffix=" mil">+7 mil</b>
                       <span>Clientes atendidos</span>
                     </div>
                     <div className="stat">
