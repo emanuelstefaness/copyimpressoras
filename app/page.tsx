@@ -49,7 +49,7 @@ export default function Page() {
                     </div>
                     <div className="stat">
                       <b data-count="15" data-suffix="">+15</b>
-                      <span>Anos de experiência</span>
+                      <span>Anos no mercado de impressoras</span>
                     </div>
                   </div>
                 </div>
