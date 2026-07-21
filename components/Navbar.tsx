@@ -13,8 +13,8 @@ export default function Navbar({ home = false }: { home?: boolean }) {
         </a>
         <nav className="nav-links">
           <a href={`${p}#inicio`} className={home ? "active" : ""}>Início</a>
-          <a href={`${p}#empresa`}>Empresa</a>
           <a href={`${p}#servicos`}>Serviços</a>
+          <a href={`${p}#empresa`}>Empresa</a>
           <a href={`${p}#marcas`}>Marcas</a>
           <a href={`${p}#contato`}>Contato</a>
         </nav>
