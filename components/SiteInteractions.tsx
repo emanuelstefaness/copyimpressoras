@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
-const WA_NUMBER = "5542998187045"; // (42) 9 9818-7045
+const WA_NUMBER = "554233040432"; // (42) 3304-0432 — fixo e WhatsApp
 const WA_TEXT = "Olá! Gostaria de solicitar um orçamento com a Copy Impressoras.";
 const EMAIL_TO = "copyimpressoras1@gmail.com"; // recebe as solicitações do formulário
 

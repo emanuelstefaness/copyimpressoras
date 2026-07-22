@@ -21,8 +21,7 @@ export default function Footer({ home = false }: { home?: boolean }) {
 
           <div>
             <h5>Contato</h5>
-            <div className="row"><Whatsapp /><span>(42) 9 9818-7045 <em>WhatsApp</em></span></div>
-            <div className="row"><Icon name="phone" /><span>(42) 3304-0432 <em>Fixo</em></span></div>
+            <div className="row"><Whatsapp /><span>(42) 3304-0432 <em>Fixo e WhatsApp</em></span></div>
             <div className="row"><Icon name="mail" /><span>copyimpressoras1@gmail.com</span></div>
             <div className="row"><Icon name="instagram" /><span>@copyimpressoras</span></div>
           </div>
